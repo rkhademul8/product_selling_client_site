@@ -1,14 +1,16 @@
 import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../../image/login.png'
 import useAuth from '../../../hooks/useAuth'
 
 const Login = () => {
 
     const [loginData, setLoginData]=useState({})
-
     const {user,googleSignIn,loginUser,authError}=useAuth()
+
+    const location=useLocation()
+    const navigate=useNavigate()
 
     const handleOnChange=e=>{
 
@@ -21,14 +23,14 @@ const Login = () => {
     }
 
     const handleLoginSubmit=e=>{
-        loginUser(loginData.email, loginData.password)
+        loginUser(loginData.email, loginData.password, location, navigate)
         e.preventDefault()
         e.target.reset()
     }
 
     //  google signIn handle
     const signInwithGoogle=()=>{
-        googleSignIn()
+        googleSignIn(location, navigate)
     }
     return (
      <Container>

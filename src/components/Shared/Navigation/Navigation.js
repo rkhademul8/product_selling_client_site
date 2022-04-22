@@ -26,6 +26,7 @@ const Navigation = () => {
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
              <Link to='/home'>Home</Link>
+             <Link to='/about'>About</Link>
             </Typography>
 
             {
