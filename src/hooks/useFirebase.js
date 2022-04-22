@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import initializationFirebase from "../components/Login/Firsebase/firebase.init"
-import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged,signOut,signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged,signOut,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 
 
 initializationFirebase()
@@ -69,6 +69,19 @@ const useFirebase=()=>{
               return ()=>unsubcribe
            },[])
 
+        //    signInWithGoogle
+        const googleProvider = new GoogleAuthProvider();
+       
+        const googleSignIn=()=>{
+            signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                setAuthError('')
+            }).catch((error) => {
+                setAuthError(error.message) ;
+            })
+          
+        }
+
 
 
     return{
@@ -78,6 +91,7 @@ const useFirebase=()=>{
         registerUser,
         logout,
         loginUser,
+        googleSignIn,
     }
 
 }

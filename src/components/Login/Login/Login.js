@@ -1,12 +1,14 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import login from '../../../image/login.png'
-
+import useAuth from '../../../hooks/useAuth'
 
 const Login = () => {
 
     const [loginData, setLoginData]=useState({})
+
+    const {user,googleSignIn,loginUser,authError}=useAuth()
 
     const handleOnChange=e=>{
 
@@ -19,9 +21,14 @@ const Login = () => {
     }
 
     const handleLoginSubmit=e=>{
-        alert("Hello")
+        loginUser(loginData.email, loginData.password)
         e.preventDefault()
         e.target.reset()
+    }
+
+    //  google signIn handle
+    const signInwithGoogle=()=>{
+        googleSignIn()
     }
     return (
      <Container>
@@ -56,10 +63,18 @@ const Login = () => {
 
              <Button   sx={{my:1}} variant='contained' type='submit'>Login</Button>
 
+             <p>------------------------------------------</p>
+
              </form>
 
+
+             <Button onClick={signInwithGoogle}   sx={{my:1}} variant='contained' >sign in with google</Button> <br />
+
              <Link to={'/register'}>New user !! Click here for register</Link>
-          
+
+             {user?.email && <Alert severity="success">User Login successfully</Alert> }
+             
+             { authError &&  <Alert severity="error">{authError}</Alert>}
         </Grid>
         <Grid item xs={12} md={6}>
         <img style={{width:'100%'}} src={login} alt="" />
