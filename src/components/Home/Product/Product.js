@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -9,7 +9,7 @@ import casual_shirt from '../../../image/casual.jpeg'
 import cotton_shirt from '../../../image/cotton.jpeg'
 import formal_shirt from '../../../image/formal.jpeg'
 import white_shirt from '../../../image/white.jpeg'
-import { Container, Typography } from '@mui/material';
+import { Alert, Container, Typography } from '@mui/material';
 import ProductDetails from '../ProductDetails/ProductDetails';
 
 
@@ -48,10 +48,12 @@ const products=[
 
 
 const Product = () => {
+    const[orderSucees, setOrderSuccess]=useState(false) 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container>
             <Typography sx={{marginTop:'50px', marginBottom:'50px'}} variant='h3'>Our Products</Typography>
+            {orderSucees && <Alert severity="success">order SuccessFul</Alert> }
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 
                        
@@ -59,6 +61,7 @@ const Product = () => {
                         {
                             products.map(product=><ProductDetails
                             product={product}
+                            setOrderSuccess={setOrderSuccess}
                             ></ProductDetails>)
                         }
 

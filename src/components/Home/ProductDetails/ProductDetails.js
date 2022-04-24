@@ -8,15 +8,22 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import { Box } from '@mui/system';
 import ProductSubmitModal from '../Modal/ProductSubmitModal';
+import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 
-const ProductDetails = ({product}) => {
 
+const ProductDetails = ({product,setOrderSuccess}) => {
+    
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const {name,img,description,price}=product
+
+    const {user}=useAuth()
+
+
     return (
         <>
 
@@ -45,19 +52,31 @@ const ProductDetails = ({product}) => {
       </CardContent>
      
           <Box style={{textAlign:'center', margin:'10px'}}>
-          <Button onClick={handleOpen} variant='contained'>Buy Now</Button>
+
+          
+          {
+            user.email ?
+            <Button onClick={handleOpen} variant='contained'>Buy Now</Button>
+          :
+          <Link to={'/login'}><Button variant='contained'>Buy Now</Button></Link>
+          }
+
+        
+
           </Box>
           
     </Card>
          </Grid>
-         <ProductSubmitModal
-         
+
+         <ProductSubmitModal  
          product={product}
          open={open}
          handleClose={handleClose}
+         setOrderSuccess={setOrderSuccess}
          >
 
          </ProductSubmitModal>
+
     </>
     );
 };

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Button, TextField } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
 
 const style = {
   position: 'absolute',
@@ -20,19 +21,69 @@ const style = {
 
 
 
-const ProductSubmitModal = ({open,handleClose,product}) => {
+const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
     const {name,price}=product
+    const {user}=useAuth()
+
+    const initialInfo={name:user.displayName, email:user.email, phone:''}
+
+    const [orderInfo, setOrder]=useState(initialInfo)
+
+    const handleOnBlur=e=>{
+        const field=e.target.name
+        const value=e.target.value
+
+        const newInfo={ ...orderInfo }
+        newInfo[field]=value
+        setOrder(newInfo)
+        
+    }
+
+    const d=new Date()
+    const date=d.toLocaleDateString()
 
     const handleSubmit=e=>{
         e.preventDefault()
-        // colect data and send to server       
-        alert('success')
-        handleClose()
+        // colect data  
+
+        const order={
+          ...orderInfo,
+          productName:name,
+          date:date,
+          price:price,
+
+        }
+
+        // console.log(order);
+
+        // send to server    
+        
+        fetch('http://localhost:5000/orders',{
+          method:'POST',
+          headers:{
+            'content-type':'application/json'
+          },
+          body:JSON.stringify(order)
+
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          // console.log(data);
+          if(data.insertedId){
+            setOrderSuccess(true)
+            handleClose()
+
+          }
+        })
+
+        // handleClose()
+        
 
     }
    
 
     return (
+
         <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -46,34 +97,48 @@ const ProductSubmitModal = ({open,handleClose,product}) => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography style={{textAlign:"center"}} id="transition-modal-title" variant="h6" component="h2">
-              {name}
-            </Typography>
+
+           <Typography>
+            Product Name: {name}
+           </Typography>
 
             <form >
             
+            
+
             <TextField
+            label="Your Name"
                 sx={{width:'90%', my:2}}
                 id="outlined-basic"
-                label="Your name" 
+                name="name"
+                onBlur={handleOnBlur}
+                defaultValue={user.displayName}
                 variant="outlined"
             />
 
             <TextField
+            label="Your Email"
+            name="email"
+            onBlur={handleOnBlur}
                 sx={{width:'90%', my:2}}
                 id="outlined-basic"
-                label="Your Email" 
+                defaultValue={user.email} 
                 variant="outlined"
             />
 
             <TextField
+            
                 sx={{width:'90%', my:2}}
                 id="outlined-basic"
+                name="phone"
+                onBlur={handleOnBlur}
                 label="Phone number" 
                 variant="outlined"
             />
+           
 
             <TextField
+              label="Product Price"
                  disabled
                  sx={{width:'90%', my:2}}
                 size='small'

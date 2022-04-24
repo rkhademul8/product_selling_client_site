@@ -1,6 +1,6 @@
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useLocation,useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import login from '../../../image/login.png'
 
@@ -8,7 +8,10 @@ const Register = () => {
     const {user,registerUser,isLoading,authError}=useAuth()
     const [registerData, setRegisterData]=useState({})
 
-    const handleOnChange=e=>{
+    const location=useLocation()
+    const navigate=useNavigate()
+
+    const handleOnBlur=e=>{
 
         const field=e.target.name
         const value=e.target.value
@@ -26,7 +29,7 @@ const Register = () => {
             return
         }
 
-        registerUser(registerData.email, registerData.password)
+        registerUser(registerData.email, registerData.password, registerData.name,location,navigate)
 
         e.preventDefault()
         e.target.reset()
@@ -44,10 +47,21 @@ const Register = () => {
              <TextField
              sx={{my:1, width:'75%'}}
                 id="standard-search"
+                label="your Name"
+                type="text"
+                name="name"
+                onBlur={handleOnBlur}
+                variant="standard"
+             />
+             <br />
+
+             <TextField
+             sx={{my:1, width:'75%'}}
+                id="standard-search"
                 label="your email"
                 type="email"
                 name="email"
-                onChange={handleOnChange}
+                onBlur={handleOnBlur}
                 variant="standard"
              />
              <br />
@@ -58,7 +72,7 @@ const Register = () => {
                 label="your password"
                 type="password"
                 name="password"
-                onChange={handleOnChange}
+                onBlur={handleOnBlur}
                 variant="standard"
              />
              <br />
@@ -69,7 +83,7 @@ const Register = () => {
                 label="Retype your password"
                 type="password"
                 name="password1"
-                onChange={handleOnChange}
+                onBlur={handleOnBlur}
                 variant="standard"
              />
              <br />

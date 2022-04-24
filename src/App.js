@@ -15,6 +15,9 @@ import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import AddProducr from './components/Dashboard/AddProducr/AddProducr';
 import Payment from './components/Dashboard/Payment/Payment';
+import ProductSubmitModal from './components/Home/Modal/ProductSubmitModal';
+
+
 function App() {
   return (
     <div className="App">
@@ -34,6 +37,10 @@ function App() {
           <Route exact path='/'  element={<Home />} />
           <Route path='/home'  element={<Home />} />
           <Route path='/about'  element={<PrivateRoute><About /></PrivateRoute>} />
+
+
+         
+
 
           <Route path='/login'  element={<Login />} />
           <Route path='/register'  element={<Register />} />
