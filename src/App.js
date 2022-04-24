@@ -16,6 +16,7 @@ import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import AddProducr from './components/Dashboard/AddProducr/AddProducr';
 import Payment from './components/Dashboard/Payment/Payment';
 import ProductSubmitModal from './components/Home/Modal/ProductSubmitModal';
+import UserOrder from './components/Dashboard/UserOrder/UserOrder';
 
 
 function App() {
@@ -27,10 +28,11 @@ function App() {
     <BrowserRouter>
     <Navigation></Navigation>
       <Routes>
-
+          {/* dashboard */}
           <Route path='/dashboard' element={ <Dashboard />} >
            
             <Route path='/dashboard/addProduct' element={<AddProducr />} />
+            <Route path='/dashboard/userorder' element={<UserOrder />} />
             <Route path='/dashboard/payment' element={<Payment />} />
           </Route>
 

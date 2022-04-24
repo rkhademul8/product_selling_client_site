@@ -35,6 +35,7 @@ function Dashboard(props) {
       <Link to={'/home'}>Home</Link> <br />
 
       <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
+      <Link to={'/dashboard/userorder'}>Your order</Link><br />
       <Link to={'/dashboard/payment'}>Payment</Link><br />
 
 
@@ -86,8 +87,9 @@ function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          <Typography sx={{textAlign:'right', display:'block'}} variant="h6" noWrap component="div">
+          Product
+
           </Typography>
         </Toolbar>
       </AppBar>
@@ -127,9 +129,11 @@ function Dashboard(props) {
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        <Toolbar />
-        
-          <Outlet></Outlet>
+        <Toolbar />    
+          <Outlet>
+
+           
+          </Outlet>
 
       </Box>
     </Box>

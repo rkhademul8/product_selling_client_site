@@ -30,6 +30,14 @@ const Navigation = () => {
             </Typography>
 
             {
+              user?.email &&
+              
+              <Link to={'/dashboard'}>Dashboard</Link>
+            }
+            
+
+
+            {
               user?.email ?
               <Button style={{color:'white'}} onClick={logout}>Louout</Button>:
               <Link to={'/login'}>Login</Link>

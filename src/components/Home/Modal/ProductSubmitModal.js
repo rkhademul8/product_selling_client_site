@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Button, TextField } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -76,6 +77,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
           }
         })
 
+
         // handleClose()
         
 
@@ -145,7 +147,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
                 defaultValue= {price} 
             />
             <Box style={{textAlign:'center', margin:'10px'}}>
-          <Button onClick={handleSubmit} variant='contained'>Confirm</Button>
+          <Button onClick={handleSubmit} variant='contained'><Link to={'/dashboard'}>Confirm</Link></Button>
           </Box>
             </form>
 
