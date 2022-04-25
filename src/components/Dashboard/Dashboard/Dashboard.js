@@ -16,13 +16,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link, Outlet } from 'react-router-dom';
+import Payment from '../Payment/Payment';
+import useAuth from '../../../hooks/useAuth'
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const {admin}=useAuth()
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -33,8 +35,13 @@ function Dashboard(props) {
       <Divider />
 
       <Link to={'/home'}>Home</Link> <br />
-
-      <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
+      {
+        admin  && 
+        <Box>
+          <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
+      <Link to={'/dashboard/makeadmin'}>Make Admin</Link><br />
+        </Box>
+      }
       <Link to={'/dashboard/userorder'}>Your order</Link><br />
       <Link to={'/dashboard/payment'}>Payment</Link><br />
 

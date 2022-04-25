@@ -10,7 +10,7 @@ const useFirebase=()=>{
     const [user, setUser]=useState({})
     const [isLoading, setLoading]=useState(true)
     const [authError, setAuthError]=useState('')
-
+    const [admin, setAdmin]=useState(false)
     const auth = getAuth();
     // user registration with email and password
     const registerUser=(email,password,name,location, navigate)=>{  
@@ -22,8 +22,9 @@ const useFirebase=()=>{
                 const newUser={email, displayName:name}
                 setUser(newUser)
 
+                // save user to database
+                saveUser(email,name, 'POST')
                 // update profile
-
                 updateProfile(auth.currentUser, {
                     displayName: name
                   }).then(() => {
@@ -61,6 +62,17 @@ const useFirebase=()=>{
             }
 
 
+            // admin roll handle
+
+            useEffect(()=>{
+                fetch(`http://localhost:5000/users/${user.email}`)
+                .then(res=>res.json())
+                .then(data=>setAdmin(data.admin))
+            
+            
+            },[user.email])
+
+
             // logout
             const logout=()=>{
                 setLoading(true)   
@@ -92,8 +104,12 @@ const useFirebase=()=>{
         const googleSignIn=(location, navigate)=>{
             signInWithPopup(auth, googleProvider)
             .then((result) => {
+                const user=result.user
                 const destination=location?.state?.from || '/'
                 navigate(destination)
+                //  save user to db
+                saveUser(user.email, user.displayName, 'PUT')
+
                 setAuthError('')
             }).catch((error) => {
                 setAuthError(error.message) ;
@@ -101,10 +117,26 @@ const useFirebase=()=>{
           
         }
 
+    // save user to database
+    const saveUser=(email, displayName, method)=>{
 
+        const user={email, displayName}
+
+        fetch('http://localhost:5000/users',{
+            method:method,
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(user)
+        })
+        .then()
+    }
+    
+    
 
     return{
         user,
+        admin,
         isLoading,
         authError,
         registerUser,

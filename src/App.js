@@ -17,6 +17,7 @@ import AddProducr from './components/Dashboard/AddProducr/AddProducr';
 import Payment from './components/Dashboard/Payment/Payment';
 import ProductSubmitModal from './components/Home/Modal/ProductSubmitModal';
 import UserOrder from './components/Dashboard/UserOrder/UserOrder';
+import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='/dashboard' element={ <Dashboard />} >
            
             <Route path='/dashboard/addProduct' element={<AddProducr />} />
+            <Route path='/dashboard/makeadmin' element={<MakeAdmin />}  />
             <Route path='/dashboard/userorder' element={<UserOrder />} />
             <Route path='/dashboard/payment' element={<Payment />} />
           </Route>
