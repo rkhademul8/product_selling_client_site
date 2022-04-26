@@ -43,7 +43,7 @@ function Dashboard(props) {
         </Box>
       }
       <Link to={'/dashboard/userorder'}>Your order</Link><br />
-      <Link to={'/dashboard/payment'}>Payment</Link><br />
+      <Link to={'/dashboard/payment/:orderId'}>Payment</Link><br />
 
 
 

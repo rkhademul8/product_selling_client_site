@@ -35,7 +35,7 @@ function App() {
             <Route path='/dashboard/addProduct' element={<AddProducr />} />
             <Route path='/dashboard/makeadmin' element={<MakeAdmin />}  />
             <Route path='/dashboard/userorder' element={<UserOrder />} />
-            <Route path='/dashboard/payment' element={<Payment />} />
+            <Route path='/dashboard/payment/:orderId' element={<Payment />} />
           </Route>
 
           <Route exact path='/'  element={<Home />} />
