@@ -31,7 +31,8 @@ const AddProducr = () => {
             .then(res => res.json())
             .then(data => {
             if(data.insertedId){
-                e.target.reset()
+                alert('Car add seccessfully')
+                    e.target.reset()
             }
             })
             .catch(error => {

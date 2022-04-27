@@ -38,8 +38,9 @@ function Dashboard(props) {
       {
         admin  && 
         <Box>
-          <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
+      <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
       <Link to={'/dashboard/makeadmin'}>Make Admin</Link><br />
+      <Link to={'/dashboard/productlist'}>Product List</Link><br />
         </Box>
       }
       <Link to={'/dashboard/userorder'}>Your order</Link><br />

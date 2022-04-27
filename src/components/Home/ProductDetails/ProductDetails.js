@@ -32,7 +32,7 @@ const ProductDetails = ({product,setOrderSuccess}) => {
         <Grid item xs={4} sm={4} md={4} >
     <Card sx={{ minWidth: 275 }}>
 
-        <img style={{width:'100%'}} src={`data:image/jpeg;base64,${image}`}/>
+        <img style={{width:'100%' , height:"400px"}} src={`data:image/jpeg;base64,${image}`}/>
 
     {/* <CardMedia
         component="image"

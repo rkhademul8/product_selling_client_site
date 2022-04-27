@@ -23,7 +23,7 @@ const style = {
 
 
 const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
-    const {name,price}=product
+    const {productName,productPrice}=product
     const {user}=useAuth()
 
     const initialInfo={name:user.displayName, email:user.email, phone:''}
@@ -44,17 +44,19 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
     const date=d.toLocaleDateString()
 
     const handleSubmit=e=>{
+
         e.preventDefault()
         // colect data  
 
         const order={
           ...orderInfo,
-          productName:name,
+          productName:productName,
           date:date,
-          price:price,
+          price:productPrice,
 
         }
 
+      
         // console.log(order);
 
         // send to server    
@@ -101,7 +103,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
           <Box sx={style}>
 
            <Typography>
-            Product Name: {name}
+            Product Name: {productName}
            </Typography>
 
             <form >
@@ -109,6 +111,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
             
 
             <TextField
+            required
             label="Your Name"
                 sx={{width:'90%', my:2}}
                 id="outlined-basic"
@@ -129,7 +132,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
             />
 
             <TextField
-            
+              required
                 sx={{width:'90%', my:2}}
                 id="outlined-basic"
                 name="phone"
@@ -144,7 +147,7 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
                  disabled
                  sx={{width:'90%', my:2}}
                 size='small'
-                defaultValue= {price} 
+                defaultValue= {productPrice} 
             />
             <Box style={{textAlign:'center', margin:'10px'}}>
           <Button onClick={handleSubmit} variant='contained'><Link to={'/dashboard'}>Confirm</Link></Button>
