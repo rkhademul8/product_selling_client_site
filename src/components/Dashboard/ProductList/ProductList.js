@@ -14,6 +14,30 @@ const ProductList = () => {
         .then(data=>setProduct(data))
     })
 
+    // product delete handle
+    const handleDelete=id=>{
+
+        const proceed=window.confirm('Are you sure !! you want to delete')
+
+        if(proceed){
+            const url=`http://localhost:5000/products/${id}`
+            fetch(url,{
+                method:'DELETE'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+
+                if(data.deletedCount > 0){
+                    alert('deleted successfully ')
+                    const remainingUsers=products.filter(product=>product._id !==id)
+                    setProduct(remainingUsers)
+                }
+            })
+        }
+     
+    }
+
+
 
     return (
         <div>
@@ -45,7 +69,7 @@ const ProductList = () => {
               {
                   <Box>
                       <Link to={`/dashboard/payment/${product._id}`}> <Button variant='contained'>Update</Button> </Link>
-                      <Link to={`/dashboard/payment/${product._id}`}> <Button variant='contained'>Delete</Button> </Link>
+                      <Button onClick={()=> handleDelete(product._id)} variant='contained'>Delete</Button> 
                   </Box>
               }
 
