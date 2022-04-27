@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -13,42 +13,51 @@ import { Alert, Container, Typography } from '@mui/material';
 import ProductDetails from '../ProductDetails/ProductDetails';
 
 
-const products=[
-    {
-        img:black_shirt,
-        name:'Black Shirt',
-        description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
-        price:800,
-    },
-    {
-        img:casual_shirt,
-        name:'Casual Shirt',
-        description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
-        price:1000,
-    },
-    {
-        img:cotton_shirt,
-        name:'Cotton Shirt',
-        description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
-        price:500,
-    },
-    {
-        img:formal_shirt,
-        name:'Formal Shirt',
-        description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
-        price:800,
-    },
-    {
-        img:white_shirt,
-        name:'White Shirt',
-        description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
-        price:700,
-    },
-]
+// const products=[
+//     {
+//         img:black_shirt,
+//         name:'Black Shirt',
+//         description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
+//         price:800,
+//     },
+//     {
+//         img:casual_shirt,
+//         name:'Casual Shirt',
+//         description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
+//         price:1000,
+//     },
+//     {
+//         img:cotton_shirt,
+//         name:'Cotton Shirt',
+//         description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
+//         price:500,
+//     },
+//     {
+//         img:formal_shirt,
+//         name:'Formal Shirt',
+//         description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
+//         price:800,
+//     },
+//     {
+//         img:white_shirt,
+//         name:'White Shirt',
+//         description:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum suscipit expedita nisi enim provident inventore facilis dolor. Optio, corporis?',
+//         price:700,
+//     },
+// ]
 
 
 const Product = () => {
     const[orderSucees, setOrderSuccess]=useState(false) 
+    
+    const [products, setProduct]=useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/products')
+        .then(res=>res.json())
+        .then(data=>setProduct(data))
+    })
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container>
@@ -60,6 +69,7 @@ const Product = () => {
 
                         {
                             products.map(product=><ProductDetails
+                            key={product._id}
                             product={product}
                             setOrderSuccess={setOrderSuccess}
                             ></ProductDetails>)

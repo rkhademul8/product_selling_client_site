@@ -19,9 +19,11 @@ const ProductDetails = ({product,setOrderSuccess}) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const {name,img,description,price}=product
+    const {productName,image,productDescrip,productPrice}=product
 
     const {user}=useAuth()
+
+ 
 
 
     return (
@@ -29,24 +31,28 @@ const ProductDetails = ({product,setOrderSuccess}) => {
 
         <Grid item xs={4} sm={4} md={4} >
     <Card sx={{ minWidth: 275 }}>
-    <CardMedia
-        component="img"
+
+        <img style={{width:'100%'}} src={`data:image/jpeg;base64,${image}`}/>
+
+    {/* <CardMedia
+        component="image"
         width='100%'
         height="400"
-        image={img}
+        image={a}
         alt="green iguana"
-      />
+      /> */}
+
       <CardContent>
        
         <Typography variant="h5" component="div">
-          {name}
+          {productName}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {description}
+          {productDescrip}
         </Typography>
 
         <Typography variant="h5" component="div">
-          {price} Tk
+          {productPrice} Tk
         </Typography>
        
       </CardContent>
