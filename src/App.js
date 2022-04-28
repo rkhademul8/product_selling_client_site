@@ -19,6 +19,7 @@ import ProductSubmitModal from './components/Home/Modal/ProductSubmitModal';
 import UserOrder from './components/Dashboard/UserOrder/UserOrder';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 import ProductList from './components/Dashboard/ProductList/ProductList';
+import UpdateProduct from './components/Dashboard/UpdateProductModal/UpdateProduct';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path='/dashboard/makeadmin' element={<MakeAdmin />}  />
             <Route path='/dashboard/userorder' element={<UserOrder />} />
             <Route path='/dashboard/payment/:orderId' element={<Payment />} />
+            <Route path='/dashboard/update/:updateId' element={<UpdateProduct />} />
             <Route path='/dashboard/productlist' element={<ProductList />} />
             
           </Route>

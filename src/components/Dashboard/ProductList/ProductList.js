@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
+import UpdateProductModal from '../UpdateProductModal/UpdateProductModal';
+
 
 const ProductList = () => {
 
@@ -37,10 +39,19 @@ const ProductList = () => {
      
     }
 
+ // This are modal state
+    const [open, setOpen] = useState(false)
+    const handleClose = () => setOpen(false);
+
+    const handleOpen = (id) => {
+      console.log(id)
+      setOpen(true);
+    }
+
 
 
     return (
-        <div>
+        <>
             <h2> ===== Product list =====</h2>
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -68,10 +79,15 @@ const ProductList = () => {
               <TableCell align="right">
               {
                   <Box>
-                      <Link to={`/dashboard/payment/${product._id}`}> <Button variant='contained'>Update</Button> </Link>
+                      <Button onClick={()=> handleOpen (product._id)} >Update</Button>
                       <Button onClick={()=> handleDelete(product._id)} variant='contained'>Delete</Button> 
+                      <Link to={`/dashboard/update/${product._id}`}><Button variant="contained">Update</Button></Link>
+
                   </Box>
               }
+
+                
+                
 
               
               </TableCell>
@@ -81,7 +97,23 @@ const ProductList = () => {
         </TableBody>
       </Table>
     </TableContainer>
-        </div>
+
+                <UpdateProductModal
+                    open={open}
+                    handleClose={handleClose}
+                    products={products}
+      
+                    >
+      
+                    </UpdateProductModal>
+                
+              
+              
+             
+              
+
+
+        </>
     );
 };
 

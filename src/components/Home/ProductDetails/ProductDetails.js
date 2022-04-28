@@ -57,18 +57,13 @@ const ProductDetails = ({product,setOrderSuccess}) => {
        
       </CardContent>
      
-          <Box style={{textAlign:'center', margin:'10px'}}>
-
-          
+          <Box style={{textAlign:'center', margin:'10px'}}>          
           {
             user.email ?
             <Button onClick={handleOpen} variant='contained'>Buy Now</Button>
           :
           <Link to={'/login'}><Button variant='contained'>Buy Now</Button></Link>
           }
-
-        
-
           </Box>
           
     </Card>
