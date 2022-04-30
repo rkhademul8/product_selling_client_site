@@ -20,11 +20,13 @@ import UserOrder from './components/Dashboard/UserOrder/UserOrder';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 import ProductList from './components/Dashboard/ProductList/ProductList';
 import UpdateProduct from './components/Dashboard/UpdateProductModal/UpdateProduct';
+import Contact from './components/Contact/Contact';
+import Footer from './components/Shared/Footer/Footer';
 
 
 function App() {
   return (
-    <div className="App">
+    <div >
 
     <AuthProvider>
 
@@ -45,7 +47,9 @@ function App() {
 
           <Route exact path='/'  element={<Home />} />
           <Route path='/home'  element={<Home />} />
-          <Route path='/about'  element={<PrivateRoute><About /></PrivateRoute>} />
+          <Route path='/about'  element={<About />} />
+          <Route path='/contact'  element={<Contact />} />
+
 
 
          
@@ -54,6 +58,8 @@ function App() {
           <Route path='/login'  element={<Login />} />
           <Route path='/register'  element={<Register />} />
       </Routes>
+
+      <Footer></Footer>
     </BrowserRouter>
     
     </AuthProvider>

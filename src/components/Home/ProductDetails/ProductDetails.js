@@ -32,7 +32,7 @@ const ProductDetails = ({product,setOrderSuccess}) => {
         <Grid item xs={4} sm={4} md={4} >
     <Card sx={{ minWidth: 275 }}>
 
-        <img style={{width:'100%' , height:"400px"}} src={`data:image/jpeg;base64,${image}`}/>
+        <img style={{width:'100%' , height:"300px"}} src={`data:image/jpeg;base64,${image}`}/>
 
     {/* <CardMedia
         component="image"
@@ -57,12 +57,12 @@ const ProductDetails = ({product,setOrderSuccess}) => {
        
       </CardContent>
      
-          <Box style={{textAlign:'center', margin:'10px'}}>          
+          <Box className="button_sty" style={{textAlign:'center', margin:'10px'}}>          
           {
             user.email ?
             <Button onClick={handleOpen} variant='contained'>Buy Now</Button>
           :
-          <Link to={'/login'}><Button variant='contained'>Buy Now</Button></Link>
+          <Link style={{textDecoration:'none'}} to={'/login'}><Button variant='contained'>Buy Now</Button></Link>
           }
           </Box>
           

@@ -1,0 +1,85 @@
+
+.banner_bg{
+    
+    margin-top: 50px;
+    padding: 50px 0px;
+}
+
+.banner_content_h3{
+    font-size: 50px;
+    font-weight: normal;
+    color: #333333;
+    
+}
+.banner_content p{
+    font-size: 20px;
+    color: rgb(135, 132, 132);
+    margin-bottom: 20px;
+    
+    
+}
+
+.button_sty Button{
+    background-color: #098BC1;
+    color: #fff;
+    padding: 10px 15px;
+}
+
+.button_sty Button:hover{
+    background-color: tomato;
+    color: #fff;
+}
+
+.service-1{
+    background: #333333;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.service-2{
+    background: #098BC1;
+    padding: 25px;
+    border-radius: 15px;
+}
+.service-3{
+    background: #333333;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.service h4{
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.service svg{
+    color: #fff;
+    display: block;
+    margin: 0px auto;
+    font-size: 50px;
+}
+
+.Newsletter{
+    background-color:#098BC1 ;
+    padding: 30px;
+}
+.Newsletter input{
+    padding: 10px 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    width: 60%;
+}
+
+.Newsletter Button {
+    margin-top: 20px;
+    background-color: #fff;
+    color:#098BC1 ;
+    padding: 10px;
+}
+
+.Newsletter Button:hover{
+    background-color: #333333;
+    color: #fff;
+}

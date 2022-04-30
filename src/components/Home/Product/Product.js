@@ -59,11 +59,12 @@ const Product = () => {
     })
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }} style={{margin:'50px 0px'}}>
 
             
-            <Container>
-            <Typography sx={{marginTop:'50px', marginBottom:'50px'}} variant='h3'>Our Products</Typography>
+            <Container >
+            <h3 className='banner_content_h3' style={{textAlign:'center'}}> Our Products</h3>
+
             {orderSucees && <Alert severity="success">order SuccessFul</Alert> }
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 

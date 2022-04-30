@@ -9,11 +9,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
+import './Navigation.css'
+
+
 const Navigation = () => {
   const {user,logout}=useAuth()
     return (
         <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar className='nav_bg' position="static">
           <Toolbar>
             <IconButton
               size="large"
@@ -24,25 +27,28 @@ const Navigation = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography className='navbarLink' variant="h6" component="div" sx={{ flexGrow: 1 }}>
              <Link to='/home'>Home</Link>
              <Link to='/about'>About</Link>
+             <Link to='/contact'>Contact</Link>
+
+
             </Typography>
 
-            {
+          <Typography className='navbarLink'>
+          {
               user?.email &&
               
               <Link to={'/dashboard'}>Dashboard</Link>
             }
-            
-
 
             {
               user?.email ?
-              <Button style={{color:'white'}} onClick={logout}>Louout</Button>:
+              <Button style={{color:'white',fontSize:'20px', padding:'0px'}} onClick={logout}>Logout</Button>:
               <Link to={'/login'}>Login</Link>
             }
             
+          </Typography>
             
           </Toolbar>
         </AppBar>
