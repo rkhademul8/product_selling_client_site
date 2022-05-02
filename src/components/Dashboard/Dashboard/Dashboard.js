@@ -18,6 +18,12 @@ import Typography from '@mui/material/Typography';
 import { Link, Outlet } from 'react-router-dom';
 import Payment from '../Payment/Payment';
 import useAuth from '../../../hooks/useAuth'
+import './Dashboard.css'
+import { Button } from '@mui/material';
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -28,23 +34,32 @@ function Dashboard(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+ 
 
+
+ 
   const drawer = (
+  
     <div>
       <Toolbar />
       <Divider />
 
-      <Link to={'/home'}>Home</Link> <br />
-      {
-        admin  && 
-        <Box>
-      <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
-      <Link to={'/dashboard/makeadmin'}>Make Admin</Link><br />
-      <Link to={'/dashboard/productlist'}>Product List</Link><br />
-        </Box>
-      }
-      <Link to={'/dashboard/userorder'}>Your order</Link><br />
-      <Link to={'/dashboard/payment/orderId'}>Payment</Link><br />
+      <Box className='dash-nav'>
+          <Link to={'/home'}>Home</Link> <br />
+          {
+            admin  && 
+            <Box>
+          <Link to={'/dashboard/addProduct'}>Add Product</Link> <br />
+          <Link to={'/dashboard/makeadmin'}>Make Admin</Link><br />
+          <Link to={'/dashboard/productlist'}>Product List</Link><br />
+            </Box>
+          }
+          <Link to={'/dashboard/userorder'}>Your order</Link><br />
+          <Link to={'/dashboard/payment/orderId'}>Payment</Link><br />
+
+         
+
+      </Box>
 
 
 
@@ -82,7 +97,7 @@ function Dashboard(props) {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          ml: { sm: `${drawerWidth}px` ,background:'#344150 '},
         }}
       >
         <Toolbar>

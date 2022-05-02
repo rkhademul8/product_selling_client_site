@@ -1,17 +1,19 @@
 
 
+import { TextField,Container,Box, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
-import { Elements } from '@stripe/react-stripe-js';
+import { Link } from 'react-router-dom';
+import UserOrder from '../UserOrder/UserOrder';
 
 
-const stripePromise = loadStripe('pk_test_51KlnlnKBtwXMZAFFlFkPHf0D5qO2HzJgX6TcGVMZ08LTY2jJcn30sIVUg4FhCnq9Pa7zCTAFNKcooxlB2Wd7fdMD00jUdjPMeC')
+
+
+
 
 const Payment = () => {
-            const {orderId}=useParams()
-        const [orderPrice, setOrderPrice]=useState({})
+        const {orderId}=useParams()
+        const [order, setOrderPrice]=useState({})
 
       useEffect(()=>{
         fetch(`http://localhost:5000/orders/${orderId}`)
@@ -19,17 +21,186 @@ const Payment = () => {
         .then(data=>setOrderPrice(data))
     },[orderId])
 
-    return (
-        <div>
-            <h2>Please Pay for: {} </h2>
-            <h4>Pay: ${orderPrice.price}</h4>
+  // console.log(order._id)
 
-             <Elements stripe={stripePromise}>
-                <CheckoutForm
-                    
-                />
-            </Elements>
-        </div>
+    
+    
+    
+    
+    const initialInfo={phone:'', trx:''}
+  
+
+    const [payInfo, setpayInfo]=useState(initialInfo)
+
+    const handleOnBlur=e=>{
+
+        const field=e.target.name
+        const value=e.target.value
+        const newInfo={ ...payInfo }
+        newInfo[field]=value
+        setpayInfo(newInfo)
+    }
+
+    const d=new Date()
+    const date=d.toLocaleDateString()
+
+    const handleSubmit=e=>{
+      e.preventDefault()
+
+      
+      
+      // colect data  
+      const payment={
+            ...payInfo,
+            name:order.name,
+            email:order.email,
+            productName:order.productName, 
+            price:order.price, 
+            date:date,
+      }
+
+      // console.log(payment)
+
+
+      fetch('http://localhost:5000/payments',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(payment)
+
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data);
+        if(data.insertedId){
+          alert('Your payments successfull')
+
+          // update order databse for payment
+          const payment={
+             payment_trx:payInfo.trx
+          }
+          
+          const url=`http://localhost:5000/orders/${order._id}`
+          fetch(url,{
+            method:"PUT",
+            headers:{
+              'content-type':'application/json'
+            },
+            body:JSON.stringify(payment)
+          })
+
+          .then(res=>res.json())
+          .then(data=>console.log(data))
+
+        }
+      })
+
+    }
+
+    return (
+        <>
+           <Container>
+           
+
+         
+           <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Please Pay Manually: ===== </h3>
+            
+            <Box style={{textAlign:'center'}}>
+            <form>
+             
+             <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Customer name:</label> <br />
+            <TextField
+             disabled
+             sx={{width:'50%'}}
+             id="outlined-disabled"
+             value={order.name}
+             size='small'
+             />
+             <br />
+            
+
+            <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Customer Email:</label> <br />
+            <TextField
+             disabled
+             sx={{width:'50%'}}
+             id="outlined-disabled"
+             value={order.email}
+             size='small'
+             />
+             <br />
+            
+
+
+            <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Product Name:</label> <br />
+            <TextField
+             disabled
+             sx={{width:'50%'}}
+             id="outlined-disabled"
+             value={order.productName}
+             size='small'
+             />
+             <br />
+           
+
+             <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Product Price:</label> <br />
+            <TextField
+            
+             disabled
+             sx={{width:'50%'}}
+            
+             value={order.price}
+             size='small'
+             />
+             <br />
+          
+
+             <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Bkash Number</label> <br />
+             <TextField
+             required
+             type="text"
+             sx={{width:'50%'}}
+             onBlur={handleOnBlur}
+             id="outlined-disabled"
+             name="phone"
+             size='small'
+             
+             />
+             <br />
+            
+
+             <label style={{color:'rgba(0, 0, 0, 0.38)'}}>Trx Id</label> <br />
+             <TextField
+             required
+             type="text"
+             onBlur={handleOnBlur}
+             sx={{width:'50%'}}
+             id="outlined-disabled"
+             name="trx"
+             size='small'
+             
+             />
+             <br />
+            
+
+             <Box  className="button_sty" style={{textAlign:'center', margin:'10px'}}>
+
+              <Button onClick={handleSubmit} variant='contained'><Link style={{textDecoration:'none'}} to={'/dashboard/checkout'}>Confirm</Link></Button>
+
+          
+          </Box>
+            
+            </form>
+            </Box>
+
+            
+           </Container>
+
+           
+          
+           
+
+        </>
     );
 };
 
@@ -42,48 +213,6 @@ export default Payment;
 
 
 
-
-
-
-
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import CheckoutForm from './CheckoutForm';
-// import {loadStripe} from '@stripe/stripe-js';
-// import { Elements } from '@stripe/react-stripe-js';
-
-
-// const stripePromise = loadStripe('pk_test_51KlnlnKBtwXMZAFFlFkPHf0D5qO2HzJgX6TcGVMZ08LTY2jJcn30sIVUg4FhCnq9Pa7zCTAFNKcooxlB2Wd7fdMD00jUdjPMeC');
-
-// const Payment = () => {
-//     const {orderId}=useParams()
-
-//     const [orderPrice, setOrderPrice]=useState({})
-
-    
-//     useEffect(()=>{
-//         fetch(`http://localhost:5000/orders/${orderId}`)
-//         .then(res=>res.json())
-//         .then(data=>setOrderPrice(data))
-//     },[orderId])
-
-    
-    
-//     return (
-//         <div>
-//             <h2>Id: {orderId}</h2>
-//             <h2>price {orderPrice.price}</h2>
-            
-//             <Elements stripe={stripePromise}>
-//             <CheckoutForm />
-//             </Elements>
-
-//         </div>
-//     );
-// };
-
-// export default Payment;
 
 
 

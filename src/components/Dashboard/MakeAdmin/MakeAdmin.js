@@ -1,4 +1,5 @@
-import { Alert, Button, TextField } from '@mui/material';
+import { Alert, Button, Container, TextField } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
 const MakeAdmin = () => {
@@ -32,26 +33,32 @@ const MakeAdmin = () => {
     }
     return (
         <div>
-            <h2>Make admin</h2>
+          <Container>
+          <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>Make Admin</h3>
 
-            <form onSubmit={handleAdminSubmit}>
+<form onSubmit={handleAdminSubmit}>
 
-                <TextField
-                type="email"
-                label="email"
-                onBlur={handleOnblur}
-                variant='standard'
-                
-                /> <br />
+    <TextField
+    type="email"
+    label="email"
+    onBlur={handleOnblur}
+    variant='standard'
+    
+    /> <br /><br />
 
-                <Button variant='contained' type='submit'>Make admin</Button>
+    <Box className='button_sty'>
+    <Button variant='contained' type='submit'>Make admin</Button>
+    </Box>
 
-                {
-                    success &&
-                    <Alert severity='success'> Admin make successfully </Alert>
-                }
+    
 
-            </form>
+    {
+        success &&
+        <Alert severity='success'> Admin make successfully </Alert>
+    }
+
+</form>
+          </Container>
         </div>
     );
 };

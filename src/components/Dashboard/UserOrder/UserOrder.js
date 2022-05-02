@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 const UserOrder = () => {
 
+
+
     const {user}=useAuth()
 
     const [userOrder, serUserOrder]=useState([])
@@ -20,9 +22,15 @@ const UserOrder = () => {
         .then(res=>res.json())
         .then(data=>serUserOrder(data))
     },[])
+
+  
+
+    
     return (
         <div>
-            <h2>==== Your order List ====  </h2>
+           
+
+            <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Your order List ===== </h3>
 
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -50,7 +58,7 @@ const UserOrder = () => {
               <TableCell align="right">{order.productName}</TableCell>
               <TableCell align="right">{order.date}</TableCell>
               <TableCell align="right">{order.price}</TableCell>
-              <TableCell align="right">{order.payment ? 'Paid':
+              <TableCell align="right">{ order.payment ? 'Paid':
               <Link to={`/dashboard/payment/${order._id}`}> <Button variant='conteined'>Pay</Button> </Link>
               
               }</TableCell>

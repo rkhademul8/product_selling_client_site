@@ -10,6 +10,7 @@ import banner from '../../../image/banner.jpg'
 import { FiTruck, } from "react-icons/fi";
 import { BiSupport } from "react-icons/bi";
 import { AiOutlineHistory } from "react-icons/ai";
+import Footer from '../../Shared/Footer/Footer';
 
 const Home = () => {
     return (
@@ -90,6 +91,9 @@ const Home = () => {
                     
                     <Button className='btn_news' variant='contained'>Subscribe</Button>
             </Container>
+
+
+            <Footer></Footer>
           
           
         </div>

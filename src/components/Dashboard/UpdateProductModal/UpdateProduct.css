@@ -1,0 +1,17 @@
+
+
+.cus_btn input{
+    background-color: #098BC1;
+    color: #fff;
+    padding: 10px 15px;
+    border: 1px solid #098BC1;
+    font-size: 20px;
+    border-radius: 5px;
+
+}
+
+.cus_btn input:hover{
+    background-color: tomato;
+    color: #fff;
+    border: 1px solid tomato;
+}

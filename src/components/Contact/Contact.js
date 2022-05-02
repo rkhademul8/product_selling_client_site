@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Paper, TextareaAutosize, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import Footer from '../Shared/Footer/Footer';
 
 const Contact = () => {
     return (
@@ -93,6 +94,7 @@ const Contact = () => {
                 </Container>
             </Box>
 
+<Footer></Footer>
        
             
         </div>

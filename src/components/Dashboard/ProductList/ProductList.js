@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
-import UpdateProductModal from '../UpdateProductModal/UpdateProductModal';
+
 
 
 const ProductList = () => {
@@ -39,20 +39,14 @@ const ProductList = () => {
      
     }
 
- // This are modal state
-    const [open, setOpen] = useState(false)
-    const handleClose = () => setOpen(false);
 
-    const handleOpen = (id) => {
-      console.log(id)
-      setOpen(true);
-    }
 
 
 
     return (
         <>
-            <h2> ===== Product list =====</h2>
+           
+            <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Product list ===== </h3>
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -78,10 +72,10 @@ const ProductList = () => {
 
               <TableCell align="right">
               {
-                  <Box>
-                      <Button onClick={()=> handleOpen (product._id)} >Update</Button>
+                  <Box className='button_sty'>
+                      <Link style={{marginRight:'10px',textDecoration:'none'}} to={`/dashboard/update/${product._id}`}><Button variant="contained">Update</Button></Link>
                       <Button onClick={()=> handleDelete(product._id)} variant='contained'>Delete</Button> 
-                      <Link to={`/dashboard/update/${product._id}`}><Button variant="contained">Update</Button></Link>
+                    
 
                   </Box>
               }
@@ -97,22 +91,7 @@ const ProductList = () => {
         </TableBody>
       </Table>
     </TableContainer>
-
-                <UpdateProductModal
-                    open={open}
-                    handleClose={handleClose}
-                    products={products}
-      
-                    >
-      
-                    </UpdateProductModal>
-                
               
-              
-             
-              
-
-
         </>
     );
 };

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../../image/login.png'
 import useAuth from '../../../hooks/useAuth'
+import Footer from '../../Shared/Footer/Footer';
+import { Box } from '@mui/system';
 
 const Login = () => {
 
@@ -33,11 +35,17 @@ const Login = () => {
         googleSignIn(location, navigate)
     }
     return (
-     <Container>
+
+        <>
+       
+    <Box style={{margin:'75px 0px'}}>
+    <Container>
             <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
 
-            <Typography variant='h4'>Login</Typography>
+        
+       
+            <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Login ===== </h3>
              
              <form onSubmit={handleLoginSubmit}>
 
@@ -84,6 +92,10 @@ const Login = () => {
         
       </Grid>
      </Container>
+    </Box>
+
+     <Footer></Footer>
+     </>
     );
 };
 

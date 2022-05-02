@@ -1,4 +1,4 @@
-import { Button, Input, TextField } from '@mui/material';
+import { Box, Button, Container, Input, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 const AddProducr = () => {
@@ -45,8 +45,9 @@ const AddProducr = () => {
     }
 
     return (
-        <div>
-            <h2>Add product</h2>
+        <div style={{margin:'127px 0px'}}>
+           <Container>
+                    <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}> Add Your Product </h3>
 
             <form onSubmit={handleAdd}>
 
@@ -88,14 +89,16 @@ const AddProducr = () => {
                 <br />
 
 
-                
+                <Box className='button_sty'>
                 <Button variant="contained" type='submit'>
-                    Add
+                    Add Product
                 </Button>
+                </Box>
 
 
 
             </form>
+           </Container>
         </div>
     );
 };

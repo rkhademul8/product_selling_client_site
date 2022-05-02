@@ -1,8 +1,10 @@
 import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import login from '../../../image/login.png'
+import Footer from '../../Shared/Footer/Footer';
 
 const Register = () => {
     const {user,registerUser,isLoading,authError}=useAuth()
@@ -36,11 +38,16 @@ const Register = () => {
     }
 
     return (
+
+        <>
+        <Box style={{margin:'75px 0px'}}>
         <Container>
             <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
 
-            <Typography variant='h4'>Register</Typography>
+         
+            
+            <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Register ===== </h3>
              
             { !isLoading && <form onSubmit={handleRegister}>
 
@@ -88,7 +95,7 @@ const Register = () => {
              />
              <br />
 
-             <Button   sx={{my:1}} variant='contained' type='submit'>Login</Button>
+             <Button   sx={{my:1}} variant='contained' type='submit'>Register</Button>
 
              </form> }
 
@@ -106,6 +113,11 @@ const Register = () => {
         
       </Grid>
      </Container>
+        </Box>
+
+     <Footer></Footer>
+
+     </>
     );
 };
 

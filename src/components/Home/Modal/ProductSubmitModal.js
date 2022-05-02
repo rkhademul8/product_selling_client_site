@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -23,7 +23,11 @@ const style = {
 
 
 const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
-    const {productName,productPrice}=product
+    
+
+  
+
+  const {productName,productPrice}=product
     const {user}=useAuth()
 
     const initialInfo={name:user.displayName, email:user.email, phone:''}
@@ -40,6 +44,9 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
         
     }
 
+
+    
+
     const d=new Date()
     const date=d.toLocaleDateString()
 
@@ -55,6 +62,12 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
           price:productPrice,
 
         }
+
+        console.log(order.price);
+
+        
+
+       
 
       
         // console.log(order);
@@ -133,12 +146,14 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
 
             <TextField
               required
+            
                 sx={{width:'90%', my:2}}
-                id="outlined-basic"
+                id="outlined-required"
                 name="phone"
                 onBlur={handleOnBlur}
                 label="Phone number" 
                 variant="outlined"
+                type="number"
             />
            
 
@@ -149,8 +164,8 @@ const ProductSubmitModal = ({open,handleClose,product,setOrderSuccess}) => {
                 size='small'
                 defaultValue= {productPrice} 
             />
-            <Box style={{textAlign:'center', margin:'10px'}}>
-          <Button onClick={handleSubmit} variant='contained'><Link to={'/dashboard'}>Confirm</Link></Button>
+            <Box  className="button_sty" style={{textAlign:'center', margin:'10px'}}>
+          <Button onClick={handleSubmit} variant='contained'><Link style={{textDecoration:'none'}} to={'/dashboard/userorder'}>Confirm</Link></Button>
           </Box>
             </form>
 

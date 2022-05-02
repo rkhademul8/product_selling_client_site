@@ -22,6 +22,7 @@ import ProductList from './components/Dashboard/ProductList/ProductList';
 import UpdateProduct from './components/Dashboard/UpdateProductModal/UpdateProduct';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Shared/Footer/Footer';
+import CheckoutForm from './components/Dashboard/Payment/CheckoutForm';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path='/dashboard/payment/:orderId' element={<Payment />} />
             <Route path='/dashboard/update/:updateId' element={<UpdateProduct />} />
             <Route path='/dashboard/productlist' element={<ProductList />} />
+            <Route path='/dashboard/checkout' element={<CheckoutForm />} />
             
           </Route>
 
@@ -59,7 +61,6 @@ function App() {
           <Route path='/register'  element={<Register />} />
       </Routes>
 
-      <Footer></Footer>
     </BrowserRouter>
     
     </AuthProvider>

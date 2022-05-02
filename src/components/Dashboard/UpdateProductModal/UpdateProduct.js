@@ -1,6 +1,9 @@
-import { TextField } from '@mui/material';
+import { Button, Container, Input, TextareaAutosize, TextField } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import './UpdateProduct.css'
+
 
 const UpdateProduct = () => {
 
@@ -72,40 +75,67 @@ const UpdateProduct = () => {
             if(data.matchedCount>0){
                 alert('update successfully')
                 setProduct({})
+               
             }
+
+            
         })
         e.preventDefault()
     }
 
     return (
         <div>
-
-            <h2>==== Update product  {product.productName} ====</h2>
-                <p>{product.productDescrip}</p>
-                <p>{product.productPrice}</p>
-
+                  
+           <Container>
+           <h3 className='banner_content_h3' style={{textAlign:'center', fontSize:"40px"}}>  ===== Update Product ===== </h3>
             <form onSubmit={handleUpdate}>
 
-            <input type="text"
+            <TextField type="text"
+            sx={{width:"40%"}}
              onChange={handleNameChange}
              value={product.productName || '' }
+             variant="standard"
+             label="Product Name"
 
              /> <br /><br />
 
 
-            <input type="text"
+            {/* <input type="text"
              onChange={handleDescripChange}
              value={product.productDescrip  || ''}
 
-             /> <br /><br />
+             /> <br /><br /> */}
 
-            <input type="text"
+             <TextareaAutosize type="text" rows="8" color='40'
+              onChange={handleDescripChange}
+              value={product.productDescrip  || ''}
+              style={{ width: '40% ', height:'150px'}}
+             />
+
+             
+             <br />
+
+            <TextField  type="text"
+            sx={{width:"40%"}}
              onChange={handlePriceChange}
              value={product.productPrice  || ''}
+             variant="standard"
+             label="Product Price"
 
              /> <br /><br />
-            <input type="submit" value="update" />
+
+                 
+
+                <br />
+
+             <Box className='cus_btn'>
+                <input  type="submit" value="update"   /> 
+             </Box>
+
+            
+            
             </form>
+           </Container>
             
         </div>
     );
